@@ -1,2 +1,8 @@
-package PACKAGE_NAME;public class Heal {
+public class Heal extends Space{
+    private int healAmount;
+
+    public Heal(String s, int h){
+        super(s);
+        healAmount = h;
+    }
 }
