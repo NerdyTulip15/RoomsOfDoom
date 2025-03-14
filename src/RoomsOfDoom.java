@@ -29,14 +29,24 @@ public class RoomsOfDoom {
     }
 
     private void play() {
-        printGrid();
+        while (player.isAlive()) {
+            printGrid();
+            System.out.println("Health: "+player.getHealth());
+            System.out.println("Use WASD to move");
+            String input = scan.nextLine().toLowerCase();
+            while (!input.equalsIgnoreCase("w")&&!input.equalsIgnoreCase("a")&&!input.equalsIgnoreCase("s")&&!input.equalsIgnoreCase("d")){
+                System.out.println("Invalid input. Try again");
+                input = scan.nextLine().toLowerCase();
+            }
+
+        }
     }
 
     private void setGrid(){
         for (int i=0;i<grid.length;i++){
             for (int j=0;j<grid[0].length;j++){
-                int num = (int)(Math.random()*6)+1;
-                if (num==1||num==2){
+                int num = (int)(Math.random()*10)+1;
+                if (num==1||num==2||num==4||num==5){
                     int damage = (int)(Math.random()*16)+5;
                     grid[i][j] = new Damage("!",damage);
                 } else if (num==3){
