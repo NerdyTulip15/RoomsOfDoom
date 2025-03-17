@@ -5,4 +5,8 @@ public class Heal extends Space{
         super(s);
         healAmount = h;
     }
+
+    public int getHealAmount() {
+        return healAmount;
+    }
 }

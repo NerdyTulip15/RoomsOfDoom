@@ -1,6 +1,9 @@
+import java.awt.*;
 import java.util.Scanner;
-
+import java.awt.color.*;
 public class RoomsOfDoom {
+    Color red = new Color(255,0,0);
+    Color white = new Color(255,255,255);
     private Player player;
     private Space[][] grid;
     private Scanner scan;
@@ -29,8 +32,13 @@ public class RoomsOfDoom {
     }
 
     private void play() {
-        while (player.isAlive()) {
-            printGrid();
+        boolean exited = false;
+        printGrid();
+        Space previousSpace = null;
+        while (player.isAlive()&&!exited) {
+            if (previousSpace!=null){
+                previousSpace.untrigger();
+            }
             System.out.println("Health: "+player.getHealth());
             System.out.println("Use WASD to move");
             String input = scan.nextLine().toLowerCase();
@@ -38,7 +46,55 @@ public class RoomsOfDoom {
                 System.out.println("Invalid input. Try again");
                 input = scan.nextLine().toLowerCase();
             }
+            int[] playerLocation = player.getLocation();
+            boolean validPlace = false;
+            if (input.equals("w")&&playerLocation[0]!=0&&!grid[playerLocation[0]-1][playerLocation[1]].isEntered()){
+                player.changeLocation(-1,0);
+                validPlace = true;
+            } else if (input.equals("s")&&playerLocation[0]!=8&&!grid[playerLocation[0]+1][playerLocation[1]].isEntered()){
+                player.changeLocation(1,0);
+                validPlace = true;
+            } else if (input.equals("a")&&playerLocation[1]!=0&&!grid[playerLocation[0]][playerLocation[1]-1].isEntered()){
+                player.changeLocation(0,-1);
+                validPlace = true;
+            } else if (input.equals("d")&&playerLocation[1]!=8&&!grid[playerLocation[0]][playerLocation[1]+1].isEntered()){
+                player.changeLocation(0,1);
+                validPlace = true;
+            } else {
+                System.out.println("You've already entered this room. There's no going back");
+            }
 
+            if (validPlace){
+                Space space = grid[playerLocation[0]][playerLocation[1]];
+                space.reveal();
+                space.trigger();
+                printGrid();
+                switch (space) {
+                    case Damage damage -> {
+                        System.out.println("You walked into a dangerous room and took some damage");
+                        player.damage(damage.getDamageGiven());
+                    }
+                    case Heal heal -> {
+                        System.out.println("You walked into a safe room and tended to some of your wounds");
+                        player.heal(heal.getHealAmount());
+                    }
+                    case Exit exit -> {
+                        exited = true;
+                        System.out.println("You found the exit and left the building");
+                    }
+                    default -> System.out.println("You walked into a room. It's just a room. Nothing special here.");
+                }
+                previousSpace = space;
+
+            }
+
+        }
+
+        if (!player.isAlive()){
+            System.out.println("GAME OVER");
+            System.out.println("You died");
+        } else {
+            System.out.println("YOU WON");
         }
     }
 
