@@ -2,8 +2,9 @@ import java.awt.*;
 
 public class Space {
     public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_WHITE = "\u001B[37m";
+    public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
 
     private String defaultSymbol;
     private String symbol;
@@ -28,12 +29,16 @@ public class Space {
         entered = true;
     }
 
-    public void trigger(){
-        symbol = ANSI_RED+symbol+ANSI_RESET;
+    public void trigger(boolean t){
+        if (!t) {
+            symbol = ANSI_RED + symbol + ANSI_RESET;
+        } else {
+            symbol = ANSI_GREEN + symbol + ANSI_RESET;
+        }
     }
 
     public void untrigger(){
-        symbol = ANSI_WHITE+symbol+ANSI_RESET;
+        symbol = ANSI_BLUE+symbol+ANSI_RESET;
     }
 
 

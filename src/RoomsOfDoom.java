@@ -1,18 +1,13 @@
-import java.awt.*;
 import java.util.Scanner;
-import java.awt.color.*;
 public class RoomsOfDoom {
-    Color red = new Color(255,0,0);
-    Color white = new Color(255,255,255);
+
     private Player player;
     private Space[][] grid;
     private Scanner scan;
-    private boolean testMode;
 
     public RoomsOfDoom(){
         grid = new Space[9][9];
         scan = new Scanner(System.in);
-        testMode = false;
     }
 
     public void start(){
@@ -20,9 +15,6 @@ public class RoomsOfDoom {
         String name = scan.nextLine();
         if (name.equalsIgnoreCase("lebron james")) {
             player = new Player(name, 200);
-        } else if (name.equalsIgnoreCase("gametest")){
-            testMode = true;
-            player = new Player(name,100);
         } else{
             player = new Player(name, 100);
         }
@@ -34,8 +26,10 @@ public class RoomsOfDoom {
     private void play() {
         boolean exited = false;
         printGrid();
+        int[] playerLocation = player.getLocation();
         Space previousSpace = null;
         while (player.isAlive()&&!exited) {
+            grid[playerLocation[0]][playerLocation[1]].trigger(true);
             if (previousSpace!=null){
                 previousSpace.untrigger();
             }
@@ -46,7 +40,7 @@ public class RoomsOfDoom {
                 System.out.println("Invalid input. Try again");
                 input = scan.nextLine().toLowerCase();
             }
-            int[] playerLocation = player.getLocation();
+            playerLocation = player.getLocation();
             boolean validPlace = false;
             if (input.equals("w")&&playerLocation[0]!=0&&!grid[playerLocation[0]-1][playerLocation[1]].isEntered()){
                 player.changeLocation(-1,0);
@@ -67,7 +61,7 @@ public class RoomsOfDoom {
             if (validPlace){
                 Space space = grid[playerLocation[0]][playerLocation[1]];
                 space.reveal();
-                space.trigger();
+                space.trigger(false);
                 printGrid();
                 switch (space) {
                     case Damage damage -> {
@@ -111,18 +105,12 @@ public class RoomsOfDoom {
                 } else {
                     grid[i][j] = new Space("_");
                 }
-                if (testMode){
-                    grid[i][j].reveal();
-                }
             }
         }
 
         int row = (int)(Math.random()*7)+1;
         int col = (int)(Math.random()*9);
         grid[row][col] = new InstaKill("X");
-        if (testMode){
-            grid[row][col].reveal();
-        }
 
         grid[8][4] = new Space("S");
         grid[8][4].reveal();
