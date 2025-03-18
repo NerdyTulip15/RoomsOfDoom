@@ -26,6 +26,10 @@ public class Space {
 
     public void reveal(){
         symbol = defaultSymbol;
+    }
+
+    public void enter(){
+        reveal();
         entered = true;
     }
 

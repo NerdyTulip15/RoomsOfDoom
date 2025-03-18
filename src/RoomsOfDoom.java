@@ -27,12 +27,8 @@ public class RoomsOfDoom {
         boolean exited = false;
         printGrid();
         int[] playerLocation = player.getLocation();
-        Space previousSpace = null;
         while (player.isAlive()&&!exited) {
             grid[playerLocation[0]][playerLocation[1]].trigger(true);
-            if (previousSpace!=null){
-                previousSpace.untrigger();
-            }
             System.out.println("Health: "+player.getHealth());
             System.out.println("Use WASD to move");
             String input = scan.nextLine().toLowerCase();
@@ -60,9 +56,10 @@ public class RoomsOfDoom {
 
             if (validPlace){
                 Space space = grid[playerLocation[0]][playerLocation[1]];
-                space.reveal();
+                space.enter();
                 space.trigger(false);
                 printGrid();
+                space.untrigger();
                 switch (space) {
                     case Damage damage -> {
                         System.out.println("You walked into a dangerous room and took some damage");
@@ -78,7 +75,6 @@ public class RoomsOfDoom {
                     }
                     default -> System.out.println("You walked into a room. It's just a room. Nothing special here.");
                 }
-                previousSpace = space;
 
             }
 
