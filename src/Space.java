@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public class Space {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_BLUE = "\u001B[34m";
@@ -45,5 +43,8 @@ public class Space {
         symbol = ANSI_BLUE+symbol+ANSI_RESET;
     }
 
+    public void enterMessage(){
+        System.out.println("You walked into a room. It's just a room. Nothing special here.");
+    }
 
 }

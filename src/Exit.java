@@ -5,7 +5,7 @@ public class Exit extends Space{
     }
 
     @Override
-    public boolean isEntered() {
-        return false;
+    public void enterMessage() {
+        System.out.println("You exited the building! Finally!!!");
     }
 }

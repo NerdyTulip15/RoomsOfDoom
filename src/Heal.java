@@ -9,4 +9,9 @@ public class Heal extends Space{
     public int getHealAmount() {
         return healAmount;
     }
+
+    @Override
+    public void enterMessage() {
+        System.out.println("You walked into the room. It magically heals your wounds (don't ask)");
+    }
 }

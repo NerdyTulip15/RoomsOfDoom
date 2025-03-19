@@ -51,7 +51,8 @@ public class RoomsOfDoom {
                 player.changeLocation(0,1);
                 validPlace = true;
             } else {
-                System.out.println("You've already entered this room. There's no going back");
+                System.out.println("Either you've already entered that room or you're trying to go somewhere that doesn't exist.");
+
             }
 
             if (validPlace){
@@ -60,22 +61,14 @@ public class RoomsOfDoom {
                 space.trigger(false);
                 printGrid();
                 space.untrigger();
-                switch (space) {
-                    case Damage damage -> {
-                        System.out.println("You walked into a dangerous room and took some damage");
-                        player.damage(damage.getDamageGiven());
-                    }
-                    case Heal heal -> {
-                        System.out.println("You walked into a safe room and tended to some of your wounds");
-                        player.heal(heal.getHealAmount());
-                    }
-                    case Exit exit -> {
-                        exited = true;
-                        System.out.println("You found the exit and left the building");
-                    }
-                    default -> System.out.println("You walked into a room. It's just a room. Nothing special here.");
+                space.enterMessage();
+                if (space instanceof Damage){
+                    player.damage(((Damage) space).getDamageGiven());
+                } else if (space instanceof Heal){
+                    player.heal(((Heal) space).getHealAmount());
+                } else if (space instanceof Exit){
+                    exited = true;
                 }
-
             }
 
         }
@@ -106,10 +99,10 @@ public class RoomsOfDoom {
 
         int row = (int)(Math.random()*7)+1;
         int col = (int)(Math.random()*9);
-        grid[row][col] = new InstaKill("X");
+        grid[row][col] = new InstaKill("X", player.getHealth());
 
         grid[8][4] = new Space("S");
-        grid[8][4].reveal();
+        grid[8][4].enter();
         col = (int)(Math.random()*9);
         grid[0][col] = new Exit("E",col);
     }
