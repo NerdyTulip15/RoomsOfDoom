@@ -58,7 +58,11 @@ public class RoomsOfDoom {
             if (validPlace){
                 Space space = grid[playerLocation[0]][playerLocation[1]];
                 space.enter();
-                space.trigger(false);
+                if (!(space instanceof Exit)) {
+                    space.trigger(false);
+                } else {
+                    space.trigger(true);
+                }
                 printGrid();
                 space.untrigger();
                 space.enterMessage();
@@ -85,7 +89,7 @@ public class RoomsOfDoom {
         for (int i=0;i<grid.length;i++){
             for (int j=0;j<grid[0].length;j++){
                 int num = (int)(Math.random()*10)+1;
-                if (num==1||num==2||num==4||num==5){
+                if (num==1||num==2||num==4||num==5||num==6||num==7){
                     int damage = (int)(Math.random()*16)+5;
                     grid[i][j] = new Damage("!",damage);
                 } else if (num==3){
