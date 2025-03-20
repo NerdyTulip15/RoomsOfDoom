@@ -14,4 +14,9 @@ public class Damage extends Space{
     public void enterMessage() {
         System.out.println("You walked into a dangerous room and took some damage");
     }
+
+    @Override
+    public void trigger() {
+        setSymbol(ANSI_RED + getSymbol() + ANSI_RESET);
+    }
 }

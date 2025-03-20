@@ -6,6 +6,6 @@ public class Exit extends Space{
 
     @Override
     public void enterMessage() {
-        System.out.println("You exited the building! Finally!!!");
+        System.out.println("You exited the building! Hooray!!!");
     }
 }

@@ -1,7 +1,7 @@
 public class InstaKill extends Damage{
 
-    public InstaKill(String s, int d){
-        super(s,d);
+    public InstaKill(String s, Player p){
+        super(s,p.getHealth());
     }
 
     @Override

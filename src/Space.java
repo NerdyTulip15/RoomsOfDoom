@@ -18,6 +18,10 @@ public class Space {
         return symbol;
     }
 
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
+
     public boolean isEntered() {
         return entered;
     }
@@ -31,12 +35,8 @@ public class Space {
         entered = true;
     }
 
-    public void trigger(boolean t){
-        if (!t) {
-            symbol = ANSI_RED + symbol + ANSI_RESET;
-        } else {
-            symbol = ANSI_GREEN + symbol + ANSI_RESET;
-        }
+    public void trigger(){
+        symbol = ANSI_GREEN + symbol + ANSI_RESET;
     }
 
     public void untrigger(){

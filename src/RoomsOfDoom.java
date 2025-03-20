@@ -15,10 +15,13 @@ public class RoomsOfDoom {
         String name = scan.nextLine();
         if (name.equalsIgnoreCase("lebron james")) {
             player = new Player(name, 200);
-        } else{
+        } else {
             player = new Player(name, 100);
         }
         setGrid();
+        if (name.equalsIgnoreCase("gametest")){
+            revealAll();
+        }
         play();
 
     }
@@ -28,7 +31,7 @@ public class RoomsOfDoom {
         printGrid();
         int[] playerLocation = player.getLocation();
         while (player.isAlive()&&!exited) {
-            grid[playerLocation[0]][playerLocation[1]].trigger(true);
+            grid[playerLocation[0]][playerLocation[1]].trigger();
             System.out.println("Health: "+player.getHealth());
             System.out.println("Use WASD to move");
             String input = scan.nextLine().toLowerCase();
@@ -58,11 +61,7 @@ public class RoomsOfDoom {
             if (validPlace){
                 Space space = grid[playerLocation[0]][playerLocation[1]];
                 space.enter();
-                if (!(space instanceof Exit)) {
-                    space.trigger(false);
-                } else {
-                    space.trigger(true);
-                }
+                space.trigger();
                 printGrid();
                 space.untrigger();
                 space.enterMessage();
@@ -103,10 +102,11 @@ public class RoomsOfDoom {
 
         int row = (int)(Math.random()*7)+1;
         int col = (int)(Math.random()*9);
-        grid[row][col] = new InstaKill("X", player.getHealth());
+        grid[row][col] = new InstaKill("\uD83D\uDC80", player);
 
         grid[8][4] = new Space("S");
         grid[8][4].enter();
+        grid[8][4].trigger();
         col = (int)(Math.random()*9);
         grid[0][col] = new Exit("E",col);
     }
@@ -117,6 +117,14 @@ public class RoomsOfDoom {
                 System.out.print("["+space.getSymbol()+"]");
             }
             System.out.println();
+        }
+    }
+
+    private void revealAll(){
+        for (Space[] row : grid){
+            for (Space space:row){
+                space.reveal();
+            }
         }
     }
 

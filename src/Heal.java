@@ -14,4 +14,9 @@ public class Heal extends Space{
     public void enterMessage() {
         System.out.println("You walked into the room. It magically heals your wounds (don't ask)");
     }
+
+    @Override
+    public void trigger() {
+        setSymbol(ANSI_BLUE + getSymbol() + ANSI_RESET);
+    }
 }
