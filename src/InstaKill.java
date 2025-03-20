@@ -12,7 +12,7 @@ public class InstaKill extends Damage{
         } else if (num==2){
             System.out.println("It turns out the room had lava instead of a floor and you melted to death");
         } else if (num==3){
-            System.out.println("You saw an orange in the room and you ate it. Unfortunately, you're deathly allergic to oranges, so you died");
+            System.out.println("You saw an orange in the room and you ate it. You're deathly allergic to oranges, so you died");
         } else if (num==4){
             System.out.println("As soon as you entered the room, several guns shot at you");
         } else {

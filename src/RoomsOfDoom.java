@@ -55,7 +55,6 @@ public class RoomsOfDoom {
                 validPlace = true;
             } else {
                 System.out.println("Either you've already entered that room or you're trying to go somewhere that doesn't exist.");
-
             }
 
             if (validPlace){
