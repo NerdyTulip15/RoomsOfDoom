@@ -87,12 +87,14 @@ public class RoomsOfDoom {
         for (int i=0;i<grid.length;i++){
             for (int j=0;j<grid[0].length;j++){
                 int num = (int)(Math.random()*10)+1;
-                if (num==1||num==2||num==4||num==5||num==6||num==7){
+                if (num==1||num==2||num==4||num==5||num==8){
                     int damage = (int)(Math.random()*16)+5;
                     grid[i][j] = new Damage("!",damage);
                 } else if (num==3){
                     int heal = (int)(Math.random()*6)+6;
                     grid[i][j] = new Heal("+",heal);
+                } else if (num==6||num==7){
+                    grid[i][j] = new Event("?",player);
                 } else {
                     grid[i][j] = new Space("_");
                 }
