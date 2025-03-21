@@ -4,11 +4,13 @@ public class Event extends Space{
     private Player player;
     private Scanner scan;
     private boolean autograph;
+    private boolean allergyInfo;
     public Event(String s, Player p){
         super(s);
         player = p;
         scan = new Scanner(System.in);
         autograph = false;
+        allergyInfo = false;
     }
 
     @Override
@@ -52,13 +54,37 @@ public class Event extends Space{
         } else if (num==3){
             System.out.println("Sometimes I wonder if I should've made this game with a GUI");
         } else if (num==4){
-            System.out.println(player.getName()+", did you know that you have an orange allergy?");
-            System.out.println("A) I do?");
-            input = scan.nextLine();
-            System.out.println("Yeah! You're deathly allergic. I wouldn't suggest having anything orange-related");
-            System.out.println("A) okay...");
-            input = scan.nextLine();
-            //I think I'm too obsessed with In Stars and Time
+            if (!allergyInfo) {
+                System.out.println(player.getName() + ", did you know that you have an orange allergy?");
+                System.out.println("A) I do?");
+                input = scan.nextLine();
+                System.out.println("Yeah! You're deathly allergic. I wouldn't suggest having anything orange-related");
+                System.out.println("A) okay...");
+                input = scan.nextLine();
+                allergyInfo = true;
+                //I think I'm too obsessed with In Stars and Time
+            } else {
+                System.out.println("Hello, "+player.getName()+"!");
+                System.out.println("Welcome to my lemonade stand!");
+                System.out.println("What would you like?");
+                System.out.println("A) Lemonade");
+                System.out.println("B) Grapes");
+                System.out.println("C) Nothing");
+                input = scan.nextLine();
+                while (!input.equalsIgnoreCase("a")&&!input.equalsIgnoreCase("b")&&!input.equalsIgnoreCase("c")){
+                    System.out.println("You can't have that, "+player.getName()+"! You've gotta pick something else.");
+                }
+                if (input.equalsIgnoreCase("a")){
+                    System.out.println("You drink the lemonade");
+                    System.out.println("It's refreshing! But not refreshing enough to heal you.");
+                } else if (input.equalsIgnoreCase("b")){
+                    System.out.println("...");
+                    System.out.println("bro");
+                    player.damage(5);
+                } else {
+                    System.out.println("Fine. More for me then.");
+                }
+            }
         } else {
             if (player.getName().equalsIgnoreCase("lebron james")&&!autograph){
                 System.out.println("Hey, you're LeBron James, right?");
@@ -67,6 +93,7 @@ public class Event extends Space{
                 input = scan.nextLine();
                 System.out.println("Thank you! I shall treasure this forever!!! :D");
                 autograph = true;
+                player.heal(5);
             } else {
                 System.out.println(player.getName()+", would you like a cookie?");
                 System.out.println("A) Sure?");
