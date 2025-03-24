@@ -76,10 +76,10 @@ public class RoomsOfDoom {
         }
 
         if (!player.isAlive()){
-            System.out.println("GAME OVER");
+            System.out.println(Space.ANSI_RED+"GAME OVER");
             System.out.println("You died");
         } else {
-            System.out.println("YOU WON");
+            System.out.println(Space.ANSI_GREEN+"YOU WON"+Space.ANSI_RESET);
         }
     }
 
