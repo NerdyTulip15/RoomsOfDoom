@@ -33,10 +33,10 @@ public class Event extends Space{
                 System.out.println("You can't have that, "+player.getName()+"! You've gotta pick something else.");
             }
             if (input.equalsIgnoreCase("a")){
-                System.out.println("You drank the water. It's very refreshing.");
+                System.out.println("You drink the water. It's very refreshing.");
                 player.heal(10);
             } else if (input.equalsIgnoreCase("b")){
-                System.out.print("You drank the mystery drink. ");
+                System.out.print("You drink the mystery drink. ");
                 num = (int)(Math.random()*2)+1;
                 if (num==1) {
                     System.out.println("It tastes really good!");
@@ -45,8 +45,8 @@ public class Event extends Space{
                     player.damage(10);
                 }
             } else if (input.equalsIgnoreCase("c")){
-                System.out.println("You drank the orange juice");
-                System.out.println("Unfortunately, you're deathly allergic to oranges, so you died");
+                System.out.println("You drink the orange juice");
+                System.out.println("Unfortunately, you're deathly allergic to oranges, so you die");
                 player.damage(player.getHealth());
             } else {
                 System.out.println("That's probably for the best");
@@ -94,13 +94,14 @@ public class Event extends Space{
                 System.out.println("Thank you! I shall treasure this forever!!! :D");
                 autograph = true;
                 player.heal(5);
+                //I'm not actually a LeBron James fan I just put this in for fun
             } else {
                 System.out.println(player.getName()+", would you like a cookie?");
                 System.out.println("A) Sure?");
                 System.out.println("B) No thanks");
                 input = scan.nextLine();
                 if (input.equalsIgnoreCase("a")){
-                    System.out.println("You ate the cookie. It tastes nice");;
+                    System.out.println("You eat the cookie. It tastes nice");;
                 } else {
                     System.out.println("Fine. More for me then");
                 }
