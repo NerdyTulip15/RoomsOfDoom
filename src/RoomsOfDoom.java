@@ -19,7 +19,7 @@ public class RoomsOfDoom {
             player = new Player(name, 100);
         }
         setGrid();
-        if (name.equalsIgnoreCase("gametest")){
+        if (name.equalsIgnoreCase("theoneandonlycharlotte")){
             revealAll();
         }
         play();
@@ -93,7 +93,7 @@ public class RoomsOfDoom {
                 } else if (num==3){
                     int heal = (int)(Math.random()*6)+6;
                     grid[i][j] = new Heal("+",heal);
-                } else if (num==6||num==7){
+                } else if (num==6){
                     grid[i][j] = new Event("?",player);
                 } else {
                     grid[i][j] = new Space("_");
