@@ -15,7 +15,7 @@ public class Event extends Space{
 
     @Override
     public void enterMessage() {
-        int num = (int)(Math.random()*5)+1;
+        int num = (int)(Math.random()*7)+1;
         String input = "";
         if (num==1){
             System.out.println("Hey, "+player.getName());
@@ -85,7 +85,7 @@ public class Event extends Space{
                     System.out.println("Fine. More for me then.");
                 }
             }
-        } else {
+        } else if (num==5){
             if (player.getName().equalsIgnoreCase("lebron james")&&!autograph){
                 System.out.println("Hey, you're LeBron James, right?");
                 System.out.println("Can I get your autograph?");
@@ -105,6 +105,66 @@ public class Event extends Space{
                 } else {
                     System.out.println("Fine. More for me then");
                 }
+            }
+        } else {
+            System.out.println(player.getName()+", I'm starting to think that this game could use a few more challenges");
+            System.out.println("A) Are you sure? Aren't all the dangerous rooms enough?");
+            input = scan.nextLine();
+            System.out.println("No. You players can still get out easily");
+            System.out.println("You know what would make this game more challenging?");
+            System.out.println("A RIDDLE!!!!!");
+            System.out.println("A) Is that really necessary?");
+            input = scan.nextLine();
+            System.out.println("Yes, "+player.getName()+". Yes it is.");
+            num = (int)(Math.random()*5)+1;
+            System.out.println("I've got a good one, too!");
+            String answer = "";
+            if (num==1){
+                answer = "echo";
+                System.out.println("I speak without a mouth and hear without ears");
+                System.out.println("I have no body, but I come alive with wind");
+                System.out.println("What am I?");
+                System.out.println("(ENTER ONE WORD ANSWER BELOW)");
+                input = scan.nextLine();
+
+            } else if (num==2){
+                answer = "map";
+                System.out.println("I have cities, but no houses");
+                System.out.println("I have mountains, but no trees");
+                System.out.println("I have water, but no fish");
+                System.out.println("What am I?");
+                System.out.println("(ENTER ONE WORD ANSWER BELOW)");
+            } else if (num==3){
+                answer = "egg";
+                System.out.println("What has to be broken before you can use it?");
+                System.out.println("(ENTER ONE WORD ANSWER BELOW)");
+                input = scan.nextLine();
+            } else if (num==4){
+                answer = "darkness";
+                System.out.println("The more of this there is, the less you see");
+                System.out.println("What am I?");
+                System.out.println("(ENTER ONE WORD ANSWER BELOW)");
+                input = scan.nextLine();
+            } else {
+                answer = "david";
+                System.out.println("David's parents have 3 sons: Snap, Crackle, and-");
+                System.out.println("What's the name of the third son?");
+                System.out.println("(ENTER ONE WORD ANSWER BELOW)");
+                input = scan.nextLine();
+            }
+
+            if (input.equalsIgnoreCase(answer)){
+                System.out.println("Wow, "+player.getName()+", you got it right! You smart cookie.");
+                System.out.println("Would be a shame if you'd gotten that wrong");
+                System.out.println("You may continue!");
+            } else {
+                System.out.println("YOU GOT IT WRONG!!! YOU TAKE 50 DAMAGE!!!");
+                player.damage(50);
+                System.out.println("Wasn't that so challenging?");
+                System.out.println("A) WHY WOULD YOU DO THAT?!");
+                input = scan.nextLine();
+                System.out.println("I told you! I wanted this game to be more challenging.");
+                System.out.println("Toodles!");
             }
         }
     }
