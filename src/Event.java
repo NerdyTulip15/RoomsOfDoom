@@ -4,7 +4,7 @@ public class Event extends Space{
     private Player player;
     private Scanner scan;
     private boolean autograph;
-    private boolean allergyInfo;
+    private static boolean allergyInfo;
     public Event(String s, Player p){
         super(s);
         player = p;
