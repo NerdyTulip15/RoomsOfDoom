@@ -3,24 +3,47 @@ import java.util.Scanner;
 public class Event extends Space{
     private Player player;
     private Scanner scan;
-    private boolean autograph;
+    private static boolean autograph;
     private static boolean allergyInfo;
+    private static boolean questionAsked;
     public Event(String s, Player p){
         super(s);
         player = p;
         scan = new Scanner(System.in);
         autograph = false;
         allergyInfo = false;
+        questionAsked = false;
     }
 
     @Override
     public void enterMessage() {
-        int num = (int)(Math.random()*7)+1;
+        int num = (int)(Math.random()*6)+1;
         String input = "";
         if (num==1){
             System.out.println("Hey, "+player.getName());
-            System.out.println("Did you know that you can't hum if you hold your nose?");
-            System.out.println("You should try it sometime!");
+            System.out.println("Are you enjoying this game?");
+            if (player.getHealth()<=20){
+                System.out.println("A) I'm on the verge of dying, mysterious voice");
+                input = scan.nextLine();
+                System.out.println("I mean yeah but are you enjoying the game?");
+            }
+
+            if (questionAsked){
+                System.out.println("A) You asked me that already");
+                input = scan.nextLine();
+                System.out.println("I need reassurance! Are you enjoying the game?");
+            }
+            System.out.println("A) Yeah");
+            System.out.println("B) No.");
+            input = scan.nextLine();
+            if (input.equalsIgnoreCase("a")){
+                System.out.println("Yay! I'm glad you like it!");
+            } else if (input.equalsIgnoreCase("b")){
+                System.out.println("Oh.");
+            } else {
+                System.out.println("I'm going to take that as a yes");
+            }
+            questionAsked = true;
         } else if (num==2){
             System.out.println("Hello, "+player.getName());
             System.out.println("Which drink would you like?");
@@ -31,6 +54,7 @@ public class Event extends Space{
             input = scan.nextLine();
             while (!input.equalsIgnoreCase("a")&&!input.equalsIgnoreCase("b")&&!input.equalsIgnoreCase("c")&&!input.equalsIgnoreCase("d")){
                 System.out.println("You can't have that, "+player.getName()+"! You've gotta pick something else.");
+                input = scan.nextLine();
             }
             if (input.equalsIgnoreCase("a")){
                 System.out.println("You drink the water. It's very refreshing.");
@@ -49,10 +73,39 @@ public class Event extends Space{
                 System.out.println("Unfortunately, you're deathly allergic to oranges, so you die");
                 player.damage(player.getHealth());
             } else {
-                System.out.println("That's probably for the best");
+                System.out.println("Wha- You're not gonna try any of my drinks?!");
+                System.out.println("You're so mean, "+player.getName());
             }
         } else if (num==3){
-            System.out.println("Sometimes I wonder if I should've made this game with a GUI");
+            System.out.println("Hey "+player.getName()+", wanna see a cool magic trick?");
+            System.out.println("A) Uh, sure?");
+            System.out.println("B) No thanks");
+            input = scan.nextLine();
+            while (!input.equalsIgnoreCase("a")&&!input.equalsIgnoreCase("b")){
+                System.out.println("I'm waiting for a proper response, "+player.getName()+"!");
+                System.out.println("Remember to respond with the right letter");
+                input = scan.nextLine();
+            }
+            if (input.equalsIgnoreCase("a")){
+                System.out.println("Okay, here goes!");
+                System.out.println("ABRACADABRA!");
+                player.heal(10);
+                System.out.println("I healed you! Did you like my magic trick?");
+                System.out.println("A) Yeah that was great! Thank you!");
+                System.out.println("B) No. I've seen better");
+                input = scan.nextLine();
+                if (input.equalsIgnoreCase("a")){
+                    System.out.println("No problem!");
+                } else if (input.equalsIgnoreCase("b")){
+                    System.out.println("Wow. You're a very ungrateful person, you know that?");
+                } else {
+                    System.out.println("I'm going to take that as a yes");
+                }
+            } else {
+                System.out.println("Aw, but I worked so hard on it!");
+                System.out.println("But it's fine I guess. You do need to get out of here");
+            }
+
         } else if (num==4){
             if (!allergyInfo) {
                 System.out.println(player.getName() + ", did you know that you have an orange allergy?");
@@ -73,6 +126,7 @@ public class Event extends Space{
                 input = scan.nextLine();
                 while (!input.equalsIgnoreCase("a")&&!input.equalsIgnoreCase("b")&&!input.equalsIgnoreCase("c")){
                     System.out.println("You can't have that, "+player.getName()+"! You've gotta pick something else.");
+                    input = scan.nextLine();
                 }
                 if (input.equalsIgnoreCase("a")){
                     System.out.println("You drink the lemonade");
@@ -116,6 +170,8 @@ public class Event extends Space{
             System.out.println("A) Is that really necessary?");
             input = scan.nextLine();
             System.out.println("Yes, "+player.getName()+". Yes it is.");
+            System.out.println("A) ...");
+            input = scan.nextLine();
             num = (int)(Math.random()*5)+1;
             System.out.println("I've got a good one, too!");
             String answer = "";
