@@ -40,10 +40,6 @@ public class Space {
         symbol = ANSI_GREEN + symbol + ANSI_RESET;
     }
 
-    public void untrigger(){
-        symbol = ANSI_BLUE+symbol+ANSI_RESET;
-    }
-
     public void enterMessage(){
         System.out.println("You walked into a room. It's just a room. Nothing special here.");
     }

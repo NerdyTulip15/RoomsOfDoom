@@ -62,7 +62,6 @@ public class RoomsOfDoom {
                 space.enter();
                 space.trigger();
                 printGrid();
-                space.untrigger();
                 space.enterMessage();
                 if (space instanceof Damage){
                     player.damage(((Damage) space).getDamageGiven());
