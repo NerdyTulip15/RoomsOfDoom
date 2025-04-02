@@ -5,12 +5,12 @@ public class Space {
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_PURPLE = "\033[0;35m";
 
-    private String defaultSymbol;
+    private final String DEFAULT_SYMBOL;
     private String symbol;
     private boolean entered;
 
     public Space(String s){
-        defaultSymbol = s;
+        DEFAULT_SYMBOL = s;
         symbol = "-";
         entered = false;
     }
@@ -28,7 +28,7 @@ public class Space {
     }
 
     public void reveal(){
-        symbol = defaultSymbol;
+        symbol = DEFAULT_SYMBOL;
     }
 
     public void enter(){
