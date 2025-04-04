@@ -181,8 +181,6 @@ public class Event extends Space{
                 System.out.println("I have no body, but I come alive with wind");
                 System.out.println("What am I?");
                 System.out.println("(ENTER ONE WORD ANSWER BELOW)");
-                input = scan.nextLine();
-
             } else if (num==2){
                 answer = "map";
                 System.out.println("I have cities, but no houses");
@@ -194,21 +192,18 @@ public class Event extends Space{
                 answer = "egg";
                 System.out.println("What has to be broken before you can use it?");
                 System.out.println("(ENTER ONE WORD ANSWER BELOW)");
-                input = scan.nextLine();
             } else if (num==4){
                 answer = "darkness";
                 System.out.println("The more of this there is, the less you see");
                 System.out.println("What am I?");
                 System.out.println("(ENTER ONE WORD ANSWER BELOW)");
-                input = scan.nextLine();
             } else {
                 answer = "david";
                 System.out.println("David's parents have 3 sons: Snap, Crackle, and-");
                 System.out.println("What's the name of the third son?");
                 System.out.println("(ENTER ONE WORD ANSWER BELOW)");
-                input = scan.nextLine();
             }
-
+            input = scan.nextLine();
             if (input.equalsIgnoreCase(answer)){
                 System.out.println("Wow, "+player.getName()+", you got it right! You smart cookie.");
                 System.out.println("Would be a shame if you'd gotten that wrong");
